@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+    <head>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+  
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+  
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <link rel="shortcut icon" href="#" />
+
+   <!-- bootstrap -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+   
+		<style type="text/css">
+
+		button {
+			font-size: 12px;
+			width: 120px;
+		}
+
+		button.btn {
+			font-size: 12px;
+			padding: 3px 9px;
+			width: auto;
+		}
+
+		.wide-btn {
+			font-size: 12px;
+			width: 150px;
+		}
+
+		#Alaska {
+			position: absolute;
+			top: 500px;
+			left: 20px;
+			padding: 10px;
+			z-index: 400;
+		}
+		#Hawaii {
+			position: absolute;
+			top: 550px;
+			left: 20px;
+			padding: 10px;
+			z-index: 400;
+		}
+		#Main {
+			position: absolute;
+			top: 600px;
+			left: 20px;
+			padding: 10px;
+			z-index: 400;
+		}
+		</style>
+
+
+
+    </head>
+
+
+
+
+
+
+<body>
+    <div class="btn-group">
+        <button type="button" id="all" class="btn btn-primary">All</button>
+        <button type="button" id="consumer" class="btn btn-info">Consumer Co-op</button>
+        <button type="button" id="federation" class="btn btn-info">Federation Co-op</button>
+        <button type="button" id="housing" class="btn btn-info">Housing Co-op</button>
+        <button type="button" id="multiStake" class="btn btn-info wide-btn">Multi-Stakeholder Co-op</button>
+        <button type="button" id="land" class="btn btn-info">Land Co-op</button>
+        <button type="button" id="other" class="btn btn-info">Other Co-op</button>
+        <button type="button" id="producer" class="btn btn-info">Producer Co-op</button>
+        <button type="button" id="worker" class="btn btn-info">Worker Co-op</button>
+        
+    </div>
+
+    <div id="map" style="height: 100vh; width: 100%;"> </div>
+
+    <button onclick="zoom2AK();" id="Alaska">View Alaska</button>
+    <button onclick="zoom2HI();" id="Hawaii">View Hawaii</button>
+    <button onclick="zoom2Main();" id="Main">Back to Main</button>
+    <script>
+
+
+
+ opensheet = '<a href="https://benborgers.com/posts/google-sheets-json">opensheet</a>';
+
+    var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
+    var map = L.map('map').setView([37.8, -96], 5.4);
+    
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
+        id: 'mapbox/light-v9',
+        attribution: opensheet + ' contributors',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(map);
+    
+    function style() {
+    return {
+        fillColor: '#94d3ea',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.3
+    };
+}
+
+
+
+
+    var statesLayer = L.geoJSON(null, {
+            style: style,
+            // onEachFeature: onEachFeature
+
+        }).addTo(map);
+
+   
+    $.getJSON("./assets/gz_2010_us_040_00_500k.json", function(data) {
+  
+    statesLayer.addData(data);
+
+
+});
+
+function zoom2AK() {
+map.setView(new L.LatLng(64.4, -151.3));
+
+};
+
+function zoom2HI() {
+map.setView(new L.LatLng(19.87, -159.19));
+
+};
+
+function zoom2Main() {
+map.setView(new L.LatLng(37.8, -96),5.4);
+
+};
+
+async function main (){ 
+   const response = await fetch(
+"https://opensheet.elk.sh/1Vl3u7MN8JIO3LtxUZWHMeqRtdR4ftqswGxVhc1R4vQs/Sheet1"
+ );
+    const json = await response.json();
+
+    // all location
+    const alllocations = json.filter((thing, index, self) =>
+  index === self.findIndex((t) => (
+    t.Name === thing.Name 
+  ))).map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let allmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < alllocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd></dl>'
+    allmarker = new L.marker([alllocations[i][2], alllocations[i][3]])
+    .bindPopup(popupText);
+    allmarkers.addLayer(allmarker);   
+};
+
+// worker location
+
+const workerlocations = json.filter( x =>x.coopType =="Worker").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let workermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < workerlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a></dt>'+'<dd>'+workerlocations[i][5]+'</dd></dl>'
+    workermarker = new L.marker([workerlocations[i][2], workerlocations[i][3]])
+    .bindPopup(popupText);
+    workermarkers.addLayer(workermarker);
+};
+
+//Consumer location
+
+const consumerlocations = json.filter( x =>x.coopType =="Consumer").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let consumermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < consumerlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ consumerlocations[i][1]+ '">'+consumerlocations[i][0]+'</a></dt>'+'<dd>'+consumerlocations[i][5]+'</dd></dl>'
+    consumermarker = new L.marker([consumerlocations[i][2], consumerlocations[i][3]])
+    .bindPopup(popupText);
+    consumermarkers.addLayer(consumermarker);
+};
+
+//Producer location
+
+const producerlocations = json.filter( x =>x.coopType =="Producer").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let producermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < producerlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ producerlocations[i][1]+ '">'+producerlocations[i][0]+'</a></dt>'+'<dd>'+producerlocations[i][5]+'</dd></dl>'
+    producermarker = new L.marker([producerlocations[i][2], producerlocations[i][3]])
+    .bindPopup(popupText);
+    producermarkers.addLayer(producermarker);
+};
+
+//Other location
+
+const otherlocations = json.filter( x =>x.coopType =="Other").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let othermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < otherlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ otherlocations[i][1]+ '">'+otherlocations[i][0]+'</a></dt>'+'<dd>'+otherlocations[i][5]+'</dd></dl>'
+    othermarker = new L.marker([otherlocations[i][2], otherlocations[i][3]])
+    .bindPopup(popupText);
+    othermarkers.addLayer(othermarker);
+};
+
+
+
+//housing location
+
+const housinglocations = json.filter( x =>x.coopType =="Housing").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let housingmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < housinglocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a></dt>'+'<dd>'+housinglocations[i][5]+'</dd></dl>'
+    housingmarker = new L.marker([housinglocations[i][2], housinglocations[i][3]])
+    .bindPopup(popupText);
+    housingmarkers.addLayer(housingmarker);
+};
+
+//Federation location
+
+const federationlocations = json.filter( x =>x.coopType =="Federation").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let federationmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < federationlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ federationlocations[i][1]+ '">'+federationlocations[i][0]+'</a></dt>'+'<dd>'+federationlocations[i][5]+'</dd></dl>'
+    federationmarker = new L.marker([federationlocations[i][2], federationlocations[i][3]])
+    .bindPopup(popupText);
+    federationmarkers.addLayer(federationmarker);
+};
+
+//Land location
+
+const landlocations = json.filter( x =>x.coopType =="Land").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let landmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < landlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ landlocations[i][1]+ '">'+landlocations[i][0]+'</a></dt>'+'<dd>'+landlocations[i][5]+'</dd></dl>'
+    landmarker = new L.marker([landlocations[i][2], landlocations[i][3]])
+    .bindPopup(popupText);
+    landmarkers.addLayer(landmarker);
+};
+
+//multiStake location
+
+const multiStakelocations = json.filter( x =>x.Multi =="Yes").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    });
+
+    let multiStakemarkers = L.markerClusterGroup();
+
+for (var i = 0; i < multiStakelocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ multiStakelocations[i][1]+ '">'+multiStakelocations[i][0]+'</a></dt>'+'<dd>'+multiStakelocations[i][5]+'</dd></dl>'
+    multiStakemarker = new L.marker([multiStakelocations[i][2], multiStakelocations[i][3]])
+    .bindPopup(popupText);
+    multiStakemarkers.addLayer(multiStakemarker);
+};
+
+
+
+
+map.addLayer(allmarkers);
+
+        $("#all").click(function() {
+             map.addLayer(allmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+         });
+         $("#worker").click(function() {
+            map.addLayer(workermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#consumer").click(function() {
+            map.addLayer(consumermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#producer").click(function() {
+            map.addLayer(producermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#other").click(function() {
+            map.addLayer(othermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#housing").click(function() {
+            map.addLayer(housingmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#federation").click(function() {
+            map.addLayer(federationmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#land").click(function() {
+            map.addLayer(landmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(multiStakemarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#multiStake").click(function() {
+            map.addLayer(multiStakemarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(federationmarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(allmarkers)
+         });
+ 
+
+}
+
+main();
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+    
+</body>
+</html>
