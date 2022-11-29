@@ -30,6 +30,17 @@
    
 		<style type="text/css">
 
+
+body {
+    margin: 0;
+    height: calc(100% - 51px); /* minus navbar incl. border */
+}        
+header.navbar {
+    margin-bottom: 0; /* remove bottom margin */ 
+}
+html, #map {
+    height: 100%;
+}
 		button {
 			font-size: 12px;
 			width: 120px;
@@ -65,8 +76,9 @@
 			top: 600px;
 			left: 20px;
 			padding: 10px;
-			z-index: 400; */
-		}
+			z-index: 400; 
+        /* } */
+
 		</style>
 
 
@@ -80,29 +92,34 @@
 
 <body>
 
-    
-
-    <div class="btn-group">
-        <button type="button" id="all" class="btn btn-primary">All</button>
-        <button type="button" id="consumer" class="btn btn-info">Consumer Co-op</button>
-        <button type="button" id="federation" class="btn btn-info">Co-op Federation</button>
-        <button type="button" id="housing" class="btn btn-info">Housing Co-op</button>
-        <button type="button" id="multiStake" class="btn btn-info wide-btn">Multi-Stakeholder Co-op</button>
-        <!-- <button type="button" id="land" class="btn btn-info">Land Co-op</button> -->
-        <button type="button" id="other" class="btn btn-info">Other Co-op</button>
-        <button type="button" id="producer" class="btn btn-info">Producer Co-op</button>
-        <button type="button" id="worker" class="btn btn-info">Worker Co-op</button>
-        
-        <button type="button" onclick="zoom2AK();" class="btn btn-success">View Alaska</button>
-        <button type="button" onclick="zoom2HI();" class="btn btn-success">View Hawaii</button>
-        <button type="button" onclick="zoom2Main();" class="btn btn-primary">Back to Main</button>
-
-
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+        <div class="btn-group">
+            <button type="button" id="all" class="btn btn-primary">All</button>
+            <button type="button" id="consumer" class="btn btn-info">Consumer Co-op</button>
+            <button type="button" id="federation" class="btn btn-info">Co-op Federation</button>
+            <button type="button" id="housing" class="btn btn-info">Housing Co-op</button>
+            <button type="button" id="multiStake" class="btn btn-info wide-btn">Multi-Stakeholder Co-op</button>
+            <!-- <button type="button" id="land" class="btn btn-info">Land Co-op</button> -->
+            <button type="button" id="other" class="btn btn-info">Other Co-op</button>
+            <button type="button" id="producer" class="btn btn-info">Producer Co-op</button>
+            <button type="button" id="worker" class="btn btn-info">Worker Co-op</button>
+            
+            <button type="button" onclick="zoom2AK();" class="btn btn-success">View Alaska</button>
+            <button type="button" onclick="zoom2HI();" class="btn btn-success">View Hawaii</button>
+            <button type="button" onclick="zoom2Main();" class="btn btn-primary">Back to Main</button>
+            
     </div>
+      </header>
 
-    <div id="map" style="height: 100vh; width: 100%;"> </div>
 
- 
+
+
+
+  
+
+    <div style="height: 100%">
+        <div id="map"> </div>
+    </div>
     <script>
 
 
