@@ -103,7 +103,13 @@
  opensheet = '<a href="https://benborgers.com/posts/google-sheets-json">opensheet</a>';
 
     var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
-    var map = L.map('map').setView([37.8, -96], 5.4);
+    var zoom = 5.4;
+if (self != top) {
+    if (window.innerWidth < 500) { zoom = 2; }
+    else { zoom = 4; }
+}
+var map = L.map('map').setView([37.8, -96], zoom);
+
     
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
         id: 'mapbox/light-v9',
