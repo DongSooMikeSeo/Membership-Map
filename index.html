@@ -42,7 +42,7 @@
 			width: 150px;
 		}
 
-		#Alaska {
+		/* #Alaska {
 			position: absolute;
 			top: 500px;
 			left: 20px;
@@ -61,7 +61,7 @@
 			top: 600px;
 			left: 20px;
 			padding: 10px;
-			z-index: 400;
+			z-index: 400; */
 		}
 		</style>
 
@@ -76,7 +76,7 @@
 
 <body>
 
-    //test
+    
 
     <div class="btn-group">
         <button type="button" id="all" class="btn btn-primary">All</button>
@@ -89,13 +89,16 @@
         <button type="button" id="producer" class="btn btn-info">Producer Co-op</button>
         <button type="button" id="worker" class="btn btn-info">Worker Co-op</button>
         
+        <button type="button" onclick="zoom2AK();" class="btn btn-success">View Alaska</button>
+        <button type="button" onclick="zoom2HI();" class="btn btn-success">View Hawaii</button>
+        <button type="button" onclick="zoom2Main();" class="btn btn-primary">Back to Main</button>
+
+
     </div>
 
     <div id="map" style="height: 100vh; width: 100%;"> </div>
 
-    <button onclick="zoom2AK();" id="Alaska">View Alaska</button>
-    <button onclick="zoom2HI();" id="Hawaii">View Hawaii</button>
-    <button onclick="zoom2Main();" id="Main">Back to Main</button>
+ 
     <script>
 
 
@@ -105,8 +108,8 @@
     var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
     var zoom = 5.4;
 if (self != top) {
-    if (window.innerWidth < 500) { zoom = 2; }
-    else { zoom = 4; }
+    if (window.innerWidth < 500) { zoom = 3; }
+    else { zoom = 4.5; }
 }
 var map = L.map('map').setView([37.8, -96], zoom);
 
