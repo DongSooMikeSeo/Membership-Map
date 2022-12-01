@@ -31,10 +31,15 @@
 		<style type="text/css">
 
 
+.leaflet-top, .leaflet-left { transform: translate3d (0, 0, 0); will-change: transform; }
+
 body {
     margin: 0;
     height: calc(100% - 51px); /* minus navbar incl. border */
-}        
+}   
+
+
+
 header.navbar {
     margin-bottom: 0; /* remove bottom margin */ 
 }
@@ -104,8 +109,8 @@ html, #map {
             <button type="button" id="producer" class="btn btn-info">Producer Co-op</button>
             <button type="button" id="worker" class="btn btn-info">Worker Co-op</button>
             
-            <button type="button" onclick="zoom2AK();" class="btn btn-success">View Alaska</button>
-            <button type="button" onclick="zoom2HI();" class="btn btn-success">View Hawaii</button>
+            <button type="button" onclick="zoom2AK();" class="btn btn-info">View Alaska</button>
+            <button type="button" onclick="zoom2HI();" class="btn btn-info">View Hawaii</button>
             <button type="button" onclick="zoom2Main();" class="btn btn-primary">Back to Main</button>
             
     </div>
