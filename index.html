@@ -62,6 +62,11 @@ html, #map {
 			width: 150px;
 		}
 
+        .popupImage {
+        max-width: 80%;
+         max-height: 80%;
+        }
+
 		/* #Alaska {
 			position: absolute;
 			top: 500px;
@@ -201,13 +206,13 @@ async function main (){
   index === self.findIndex((t) => (
     t.Name === thing.Name 
   ))).map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let allmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < alllocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd>'+'<dd><img src="https://sharedcapital.coop/wp-content/uploads/'+ alllocations[i][6]+ '.png"+ " class=popupImage " + "></dd></dl>'
     allmarker = new L.marker([alllocations[i][2], alllocations[i][3]])
     .bindPopup(popupText);
     allmarkers.addLayer(allmarker);   
