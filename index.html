@@ -235,7 +235,7 @@ async function main (){
 // worker location
 
 const workerlocations = json.filter( x =>x.coopType =="Worker").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let workermarkers = L.markerClusterGroup();
@@ -250,7 +250,7 @@ for (var i = 0; i < workerlocations.length; i++) {
 //Consumer location
 
 const consumerlocations = json.filter( x =>x.coopType =="Consumer").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let consumermarkers = L.markerClusterGroup();
@@ -265,7 +265,7 @@ for (var i = 0; i < consumerlocations.length; i++) {
 //Producer location
 
 const producerlocations = json.filter( x =>x.coopType =="Producer").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let producermarkers = L.markerClusterGroup();
@@ -280,7 +280,7 @@ for (var i = 0; i < producerlocations.length; i++) {
 //Other location
 
 const otherlocations = json.filter( x =>x.coopType =="Other").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let othermarkers = L.markerClusterGroup();
@@ -297,7 +297,7 @@ for (var i = 0; i < otherlocations.length; i++) {
 //housing location
 
 const housinglocations = json.filter( x =>x.coopType =="Housing").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let housingmarkers = L.markerClusterGroup();
@@ -312,7 +312,7 @@ for (var i = 0; i < housinglocations.length; i++) {
 //Federation location
 
 const federationlocations = json.filter( x =>x.coopType =="Federation").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let federationmarkers = L.markerClusterGroup();
@@ -327,7 +327,7 @@ for (var i = 0; i < federationlocations.length; i++) {
 //Land location
 
 const landlocations = json.filter( x =>x.coopType =="Land").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let landmarkers = L.markerClusterGroup();
@@ -342,7 +342,7 @@ for (var i = 0; i < landlocations.length; i++) {
 //multiStake location
 
 const multiStakelocations = json.filter( x =>x.Multi =="Yes").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
+    return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description, row.memberNumber];
     });
 
     let multiStakemarkers = L.markerClusterGroup();
