@@ -66,7 +66,7 @@ html, #map {
         max-width: 50%;
          max-height: 50%;
          z-index: 9;
-         border: 2px solid #555;
+         border:  white;
          margin: 0 auto; display:block;
         }
 
@@ -76,7 +76,7 @@ html, #map {
          z-index: 10;
       bottom: -1px;
   left: 100px;
-  border: 2px solid #555;
+  border:  white;
 position: absolute;
         }
 
@@ -225,7 +225,7 @@ async function main (){
     let allmarkers = L.markerClusterGroup();
 
     for (var i = 0; i < alllocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ alllocations[i][6]+ '.png"+ " class=popupImage1 " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ alllocations[i][6]+ '_2.png"+ " class=popupImage2 " + "></div>'
+    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ alllocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ alllocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
 
     allmarker = new L.marker([alllocations[i][2], alllocations[i][3]])
     .bindPopup(popupText);
@@ -241,7 +241,7 @@ const workerlocations = json.filter( x =>x.coopType =="Worker").map((row) => {
     let workermarkers = L.markerClusterGroup();
 
 for (var i = 0; i < workerlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a></dt>'+'<dd>'+workerlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a></dt>'+'<dd>'+workerlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ workerlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ workerlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     workermarker = new L.marker([workerlocations[i][2], workerlocations[i][3]])
     .bindPopup(popupText);
     workermarkers.addLayer(workermarker);
@@ -256,7 +256,7 @@ const consumerlocations = json.filter( x =>x.coopType =="Consumer").map((row) =>
     let consumermarkers = L.markerClusterGroup();
 
 for (var i = 0; i < consumerlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ consumerlocations[i][1]+ '">'+consumerlocations[i][0]+'</a></dt>'+'<dd>'+consumerlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ consumerlocations[i][1]+ '">'+consumerlocations[i][0]+'</a></dt>'+'<dd>'+consumerlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ consumerlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ consumerlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     consumermarker = new L.marker([consumerlocations[i][2], consumerlocations[i][3]])
     .bindPopup(popupText);
     consumermarkers.addLayer(consumermarker);
@@ -271,7 +271,7 @@ const producerlocations = json.filter( x =>x.coopType =="Producer").map((row) =>
     let producermarkers = L.markerClusterGroup();
 
 for (var i = 0; i < producerlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ producerlocations[i][1]+ '">'+producerlocations[i][0]+'</a></dt>'+'<dd>'+producerlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ producerlocations[i][1]+ '">'+producerlocations[i][0]+'</a></dt>'+'<dd>'+producerlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ producerlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ producerlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     producermarker = new L.marker([producerlocations[i][2], producerlocations[i][3]])
     .bindPopup(popupText);
     producermarkers.addLayer(producermarker);
@@ -286,7 +286,7 @@ const otherlocations = json.filter( x =>x.coopType =="Other").map((row) => {
     let othermarkers = L.markerClusterGroup();
 
 for (var i = 0; i < otherlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ otherlocations[i][1]+ '">'+otherlocations[i][0]+'</a></dt>'+'<dd>'+otherlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ otherlocations[i][1]+ '">'+otherlocations[i][0]+'</a></dt>'+'<dd>'+otherlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ otherlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ otherlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     othermarker = new L.marker([otherlocations[i][2], otherlocations[i][3]])
     .bindPopup(popupText);
     othermarkers.addLayer(othermarker);
@@ -303,7 +303,7 @@ const housinglocations = json.filter( x =>x.coopType =="Housing").map((row) => {
     let housingmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < housinglocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a></dt>'+'<dd>'+housinglocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a></dt>'+'<dd>'+housinglocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ housinglocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ housinglocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     housingmarker = new L.marker([housinglocations[i][2], housinglocations[i][3]])
     .bindPopup(popupText);
     housingmarkers.addLayer(housingmarker);
@@ -318,7 +318,7 @@ const federationlocations = json.filter( x =>x.coopType =="Federation").map((row
     let federationmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < federationlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ federationlocations[i][1]+ '">'+federationlocations[i][0]+'</a></dt>'+'<dd>'+federationlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ federationlocations[i][1]+ '">'+federationlocations[i][0]+'</a></dt>'+'<dd>'+federationlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ federationlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ federationlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     federationmarker = new L.marker([federationlocations[i][2], federationlocations[i][3]])
     .bindPopup(popupText);
     federationmarkers.addLayer(federationmarker);
@@ -333,7 +333,7 @@ const landlocations = json.filter( x =>x.coopType =="Land").map((row) => {
     let landmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < landlocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ landlocations[i][1]+ '">'+landlocations[i][0]+'</a></dt>'+'<dd>'+landlocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ landlocations[i][1]+ '">'+landlocations[i][0]+'</a></dt>'+'<dd>'+landlocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ landlocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ landlocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     landmarker = new L.marker([landlocations[i][2], landlocations[i][3]])
     .bindPopup(popupText);
     landmarkers.addLayer(landmarker);
@@ -348,7 +348,7 @@ const multiStakelocations = json.filter( x =>x.Multi =="Yes").map((row) => {
     let multiStakemarkers = L.markerClusterGroup();
 
 for (var i = 0; i < multiStakelocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ multiStakelocations[i][1]+ '">'+multiStakelocations[i][0]+'</a></dt>'+'<dd>'+multiStakelocations[i][5]+'</dd></dl>'
+    popupText = '<dl><dt><a href="'+ multiStakelocations[i][1]+ '">'+multiStakelocations[i][0]+'</a></dt>'+'<dd>'+multiStakelocations[i][5]+'</dd></dl>'+'<div><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ multiStakelocations[i][6]+ '.png"+ " class=popupImage1 alt =""/ " + "><img src="https://sharedcapital.coop/wp-content/uploads/MemberMap/'+ multiStakelocations[i][6]+ '_2.png"+ " class=popupImage2 alt =""/ " + "></div>'
     multiStakemarker = new L.marker([multiStakelocations[i][2], multiStakelocations[i][3]])
     .bindPopup(popupText);
     multiStakemarkers.addLayer(multiStakemarker);
