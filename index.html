@@ -225,8 +225,22 @@ async function main (){
 
 
 
-const response = fetch(apiUrl)
-const json = response.json()
+   fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // The 'values' property contains the rows of data
+                const rows = data.values;
+                if (rows && rows.length > 0) {
+                    const headers = rows[0];
+                    const json = rows.slice(1).map(row => {
+                        let rowObject = {};
+                        headers.forEach((header, index) => {
+                            rowObject[header] = row[index];
+                        });
+                        return rowObject;
+                    });
+                    document.getElementById('output').textContent = JSON.stringify(json, null, 2);
+                    console.log(json);
    
 
 
